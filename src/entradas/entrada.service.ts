@@ -31,9 +31,13 @@ export class EntradaService {
     return entrada;
   }
 
-  async update(id: number, updateData: Entrada) {
+  async update(id: number, updateEntradaDto: UpdateEntradaDto) {
     const entrada = await this.findOne(id);
-    return this.entradaRepository.save({ ...entrada, ...updateData });
+    if (!entrada) {
+      throw new NotFoundException(`Entry with ID ${id} not found`);
+    }
+    const updatedEntrada = { ...entrada, ...updateEntradaDto };
+    return this.entradaRepository.save(updatedEntrada);
   }
 
   async remove(id: number) {

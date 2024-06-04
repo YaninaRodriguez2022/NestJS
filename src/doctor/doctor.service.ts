@@ -12,8 +12,7 @@ export class DoctorService {
   constructor(
     @InjectRepository(Doctors)
     private doctorsRepository: Repository<Doctors>,
-    @InjectRepository(Entrada)
-    private entradaRepository: Repository<Entrada>,
+    private entradaService: EntradaService,
   ) {}
 
   async create(createDoctorDto: CreateDoctorDto) {
@@ -44,7 +43,7 @@ export class DoctorService {
     return this.doctorsRepository.save(doctor);
   }
   async hardRemove(id: number){
-    await this.entradaRepository.hardRemoveDoctorEntries(+id);
+    await this.entradaService.hardRemoveDoctorEntries(+id);
     await this.doctorsRepository.delete(id);
   }
 }

@@ -1,4 +1,4 @@
-import { IsBoolean, IsString } from '@nestjs/class-validator';
+import { IsBoolean, IsString } from 'class-validator';
 
 export class CreateEnfermedadDto {
   id: number;
